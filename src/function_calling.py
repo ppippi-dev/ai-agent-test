@@ -72,7 +72,7 @@ def get_stock_code_from_gpt(user_input: str):
             "content": f"유저의 질문: {user_input}, 데이터: {answer_data}",
         },
     ]
-    response = client.beta.chat.completions.parse(
+    response = client.chat.completions.create(
         model=settings.OPENAI_MODEL,
         messages=messages,
         temperature=0.7,
