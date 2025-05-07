@@ -29,7 +29,7 @@ def get_stock_code_from_gpt(user_input: str) -> StockCode | None:
         },
     ]
     response = client.beta.chat.completions.parse(
-        model="gpt-4o-mini",
+        model=settings.OPENAI_MODEL,
         messages=messages,
         max_tokens=150,
         temperature=0.7,
@@ -83,7 +83,7 @@ def answer_paraphrase(answer_data: dict, user_input: str) -> str | None:
         },
     ]
     response = client.beta.chat.completions.parse(
-        model="gpt-4o-mini",
+        model=settings.OPENAI_MODEL,
         messages=messages,
         temperature=0.7,
     )
@@ -104,12 +104,8 @@ def act(user_input):
 def main():
     """main function"""
 
-    while True:
-        user_input = input("유저의 질문: ")
-        if user_input == "exit":
-            break
-        response = act(user_input)
-        print(response)
+    response = act("삼성전자 주가")
+    print(response)
 
 
 if __name__ == "__main__":
