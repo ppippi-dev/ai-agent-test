@@ -56,11 +56,29 @@ def get_stock_code_from_gpt(user_input: str):
                 args = json.loads(tool_call.function.arguments)
                 stock_code = args.get("stock_code")
                 if stock_code:
-                    return get_stock_price(stock_code)
+                    answer_data = get_stock_price(stock_code)
             except json.JSONDecodeError:
                 return {"success": False, "error": "응답 파싱 오류"}
+        else:
+            return {"success": False, "error": "적절한 함수 호출을 찾을 수 없음"}
 
-    return {"success": False, "error": "적절한 함수 호출을 찾을 수 없음"}
+    messages = [
+        {
+            "role": "system",
+            "content": "너는 유저의 질문에 대한 답변을 만들어주는 프로그램이야. 유저의 질문에 대한 답변을 만들어줘",
+        },
+        {
+            "role": "user",
+            "content": f"유저의 질문: {user_input}, 데이터: {answer_data}",
+        },
+    ]
+    response = client.beta.chat.completions.parse(
+        model=settings.OPENAI_MODEL,
+        messages=messages,
+        temperature=0.7,
+    )
+
+    return response.choices[0].message.content
 
 
 def get_stock_price(stock_code: str) -> dict:
