@@ -12,7 +12,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
     # API 설정
-    OPENAI_API_KEY: str | None = None
+    OPENAI_API_KEY: str = ""
+    OPENAI_MODEL: str = "gpt-4.1-nano"
 
 
 # 설정 인스턴스 생성

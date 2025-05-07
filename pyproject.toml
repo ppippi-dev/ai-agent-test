@@ -1,19 +1,11 @@
 [project]
-name = "ai-agent"
+name = "ai-agent-test"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "ppippi",email = "wjdqlsdlsp@naver.com"}
-]
+description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12.7"
 dependencies = [
-    "openai (>=1.70.0,<2.0.0)",
-    "pydantic-settings (>=2.8.1,<3.0.0)",
-    "yfinance (>=0.2.55,<0.3.0)"
+    "openai>=1.77.0",
+    "pydantic-settings>=2.9.1",
+    "yfinance>=0.2.59",
 ]
-
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
